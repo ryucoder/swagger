@@ -5,7 +5,7 @@ from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework import status
 
-from book.serializers import BookSerializer
+from book.serializers import BookSerializer, BookCustomListSerializer
 from book.models import Book
 
 
@@ -18,6 +18,7 @@ class BookViewSet(viewsets.ModelViewSet):
     @action(detail=False, methods=['get'])
     def custom_list(self, request, pk=None):
         
+        serializer = BookCustomListSerializer()
         print()
         print()
         print("Damn! I was printed!!")

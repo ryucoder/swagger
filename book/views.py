@@ -59,6 +59,7 @@ class BookViewSet(viewsets.ModelViewSet):
     
     
     # Pass schema=None into the action decorator to disaable the documentation of a particular endpoint.
+    # It would be useful to disable documentation of admin level endpoints
     # @action(detail=True, methods=['post'], schema=None)
     # def custom_detail(self, request, pk=None):
     #     return Response(serializer.errors, status=status.HTTP_200_OK)

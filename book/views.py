@@ -32,26 +32,30 @@ class BookViewSet(viewsets.ModelViewSet):
     @action(detail=False, methods=['get'], serializer_class=BookCustomListSerializer)
     def custom_list(self, request, pk=None):
         
-        # serializer = BookCustomListSerializer()
+        serializer = BookCustomListSerializer()
         print()
         print()
         print("Damn! I was printed!!")
         print()
         print()
 
-        return Response(serializer.errors, status=status.HTTP_200_OK)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
     @action(detail=True, methods=['post'], serializer_class=BookCustomDetailSerializer)
     def custom_detail(self, request, pk=None):
-        
-        # instance = BookCustomDetailSerializer.objects.get()
+
+        try:        
+            instance = Book.objects.get(id=pk)
+        except Book.DoesNotExist:
+            return Response(data={"errors": "Detail Not Found"}, status=status.HTTP_200_OK)
+
         print()
         print()
         print("Damn! I was printed!!")
         print()
         print()
 
-        return Response(serializer.errors, status=status.HTTP_200_OK)
+        return Response(instance.data, status=status.HTTP_200_OK)
     
     
     # Pass schema=None into the action decorator to disaable the documentation of a particular endpoint.
